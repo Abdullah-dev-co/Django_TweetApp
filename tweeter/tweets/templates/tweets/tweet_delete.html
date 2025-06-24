@@ -1,0 +1,23 @@
+<!-- tweets/templates/tweets/tweet_delete.html -->
+{% extends 'tweets/base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white rounded-lg shadow p-6">
+    <h2 class="text-xl font-bold mb-4">Delete Tweet</h2>
+    <p class="mb-4">Are you sure you want to delete this tweet?</p>
+    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+        <p>{{ tweet.content }}</p>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="flex space-x-2">
+            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                Yes, Delete
+            </button>
+            <a href="{% url 'home' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

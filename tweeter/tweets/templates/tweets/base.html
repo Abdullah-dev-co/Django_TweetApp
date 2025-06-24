@@ -1,0 +1,41 @@
+<!-- tweets/templates/tweets/base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweeter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="{% url 'home' %}" class="text-blue-500 font-bold text-2xl">Tweeter</a>
+            <nav>
+                {% if user.is_authenticated %}
+                    <span class="mr-4 text-gray-700">Hello, {{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg mr-2">Login</a>
+                    <a href="{% url 'register' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">Register</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-6">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-lg">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,72 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media/
+
+# Backup files
+*.bak 
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Node
+node_modules/
+
+# Coverage
+.coverage
+htmlcov/
+.coverage.*
+*.cover
+
+# Static files at production
+staticfiles/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Database migrations (optional - some prefer to keep them)
+# !/project_name/migrations/
+# /project_name/migrations/*
+# !/project_name/migrations/__init__.py
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# PyCharm
+.idea/
+
+# pytest
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Package manager files
+*.egg-info/
+dist/
+build/

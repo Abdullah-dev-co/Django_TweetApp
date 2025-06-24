@@ -1,0 +1,50 @@
+<!-- tweets/templates/tweets/home.html -->
+{% extends 'tweets/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="bg-white rounded-lg shadow p-6 mb-6">
+    {% if user.is_authenticated %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg mt-2">Tweet</button>
+    </form>
+    {% else %}
+    <p class="text-center text-gray-600">Please <a href="{% url 'login' %}" class="text-blue-500">login</a> to post tweets.</p>
+    {% endif %}
+</div>
+
+<div class="space-y-4">
+    {% for tweet in tweets %}
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+                <div class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                    {{ tweet.user.username|first|upper }}
+                </div>
+            </div>
+            <div class="flex-1">
+                <div class="flex items-center space-x-2">
+                    <span class="font-bold">{{ tweet.user.username }}</span>
+                    <span class="text-gray-500 text-sm">{{ tweet.created_at|timesince }} ago</span>
+                </div>
+                <p class="mt-1 text-gray-800">{{ tweet.content }}</p>
+                {% if tweet.image %}
+                <div class="mt-3">
+                    <img src="{{ tweet.image.url }}" alt="Tweet image" class="rounded-lg max-h-80 object-cover">
+                </div>
+                {% endif %}
+                
+                {% if user == tweet.user %}
+                <div class="mt-3 flex space-x-2">
+                    <a href="{% url 'tweet-update' tweet.pk %}" class="text-blue-500 hover:text-blue-700">Edit</a>
+                    <a href="{% url 'tweet-delete' tweet.pk %}" class="text-red-500 hover:text-red-700">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

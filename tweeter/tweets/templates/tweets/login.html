@@ -1,0 +1,19 @@
+<!-- tweets/templates/tweets/login.html -->
+{% extends 'tweets/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white rounded-lg shadow p-6">
+    <h2 class="text-2xl font-bold mb-6 text-center">Login to your account</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg mt-4">
+            Login
+        </button>
+    </form>
+    <div class="mt-4 text-center">
+        <p class="text-gray-600">Don't have an account? <a href="{% url 'register' %}" class="text-blue-500">Register</a></p>
+    </div>
+</div>
+{% endblock %}
