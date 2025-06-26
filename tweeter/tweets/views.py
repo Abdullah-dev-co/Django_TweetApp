@@ -56,6 +56,7 @@ class TweetUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Tweet
     form_class = TweetForm
     template_name = 'tweets/tweet_update.html'
+    success_url = reverse_lazy('home')
     
     def form_valid(self, form):
         form.instance.user = self.request.user
